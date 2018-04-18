@@ -81,6 +81,9 @@ It is sometimes useful to share configuraiton settings beween web apps. For exam
 
 All settings except `hosts`may be shared.
 
+### Multiple Certificates for a Single Site
+If you have a site that supports many domain names, it can be useful to group them into separate certificates. In order to handle renewing multiple certificates associated with a single site, use the following syntax for the web app's name: `webAppName[groupName]` or `webAppName{siteSlotName}[groupName]`. For example, if you have a `foo` site that has two certificates that need to be updated, configure `letsencrypt:webApps` to be `foo;foo[Group2]`. You would still need to configure the regular settings for each of them (e.g. `letsencrypt:foo-subscriptionId`, `letsencrypt:foo[Group2]-subscriptionId` and so forth).
+
 ## Installation
 1. (**optional but highly recommended**) Create a new dedicated Web App for cert renewal, to which you will deploy the `letsencrypt-webapp-renewer` WebJob. This will drastically decrease the likelihood of accidental deletion of the renewal WebJob  (e.g. upon deployment of a different app to the same Web App using _Delete Existing files_)
 1. Download the latest [`letsencrypt-webapp-renewer` WebJob zip file](https://github.com/ohadschn/letsencrypt-webapp-renewer/releases).
